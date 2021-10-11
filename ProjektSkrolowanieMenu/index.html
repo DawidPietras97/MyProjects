@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Menu scroll</title>
+
+ <style>
+  * {
+   margin: 0;
+  }
+
+  nav {
+   display: flex;
+   padding: 20px;
+   height: 10vh;
+   border-bottom: solid 4px blue;
+   /* position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   background-color: white; */
+  }
+
+  nav a {
+   flex-grow: 1;
+   font-family: arial;
+   font-size: 30px;
+   text-align: center;
+   color: black;
+   text-decoration: none;
+  }
+
+  nav a:hover {
+   text-decoration: underline;
+  }
+
+  section {
+   height: 80vh;
+  }
+
+  .s1 {
+   background-image: url(img/s3-sportback-1920x600.webp);
+   background-repeat: no-repeat;
+   background-position-y: center;
+  }
+
+  .s2 {
+    background-image: url(img/1920x600_AA4_L_191004-3_v2.webp);
+   background-repeat: no-repeat;
+   background-position-y: center;
+  }
+
+  .s3 {
+    background-image: url(img/1920x600-v2-AA6_TFSIe_191001_RGB.webp);
+   background-repeat: no-repeat;
+   background-position-y: center;
+  }
+
+  .s4 {
+    background-image: url(img/1920x1080-stage-desktop-ARS7_191001.webp);
+   background-repeat: no-repeat;
+   background-position-y: center;
+  }
+
+  footer {
+   padding: 20px;
+   text-align: center;
+   font-size: 40px;
+   font-family: arial;
+  }
+ </style>
+</head>
+
+<body>
+
+ <nav>
+  <a class="a3"  href="#">Audi A3</a>
+  <a class="a4" href="#">Audi A4</a>
+  <a class="a6" href="#">Audi A6</a>
+  <a class="a7" href="#">Audi A7</a>
+ </nav>
+
+ <section data-section="a3" id="a3" class="s1"></section>
+ <section data-section="a4" id="a4" class="s2"></section>
+ <section data-section="a6" id="a6" class="s3"></section>
+ <section data-section="a7" id="a7" class="s4"></section>
+
+ <footer>
+  <p>Stopka</p>
+ </footer>
+
+ <script src="jquery-3.3.1.min.js"></script>
+ <script>
+  // $('.me').on('click', function () {
+  //  $('body, html').animate({
+  //   scrollTop: $('.s1').offset().top
+  //  }, 500)
+  // })
+
+  // $('.portfolio').on('click', function () {
+  //  $('body, html').animate({
+  //   scrollTop: $('.s2').offset().top
+  //  }, 500)
+  // })
+
+  $('nav a').on('click', function () {
+   const goToSection = "[data-section=" + $(this).attr('class') + "]";
+   $('body, html').animate({
+    scrollTop: $(goToSection).offset().top
+   })
+  })
+ </script>
+</body>
+
+</html>
