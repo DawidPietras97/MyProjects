@@ -1,0 +1,39 @@
+.wrap {
+    width: 80vw;
+    height: 150vh;
+    margin: 0 auto;
+    line-height: 200%;
+
+}
+
+i {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    font-size: 40px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+nav {
+    height: 300px;
+    position: fixed;
+    bottom: -270px;
+    left: 0;
+    right: 0;
+    background-color: black;
+    transition: .4s;
+}
+
+i.on {
+    bottom: 320px;
+    transform: rotate(180deg);
+}
+
+nav.on {
+    bottom: 0;
+}
