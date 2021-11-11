@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRA</title>
+</head>
+<style>
+div{
+ height: 270px;
+ width: 380px;
+}
+h1{
+    margin-left: 20px;
+}
+
+</style>
+<body>
+    <div></div>
+    <h1></h1>
+    <script>
+        let zmiana = 1;
+        const DIV = document.querySelector("div");
+        const H1 = document.querySelector("h1");
+        let haslo = prompt("Podaj słowo do odgadnięcia:").toUpperCase();
+        let litery = new Set();
+        let szyfr = [];
+
+        wyswietl = (tab) =>{
+            let mhaslo = "";
+            for(let x of tab){
+                mhaslo += x;
+            }
+            H1.innerHTML = mhaslo;
+        }
+
+        for(let i = 0; i < haslo.length; i++){
+            litery.add(haslo[i]);
+            szyfr.push(haslo[i]);
+            szyfr[i] = "*";
+        }
+     
+        wyswietl(szyfr);
+
+        while(true){
+            DIV.style.backgroundImage = `url(img/wisielec${zmiana}.png)`;
+            if(litery.size == 0){
+                H1.innerHTML =`Gratuluje hasło to ${haslo}!`;
+                break;
+            }
+            else if (zmiana == 11){
+                H1.innerHTML =`Przegrałeś hasło to ${haslo}!`;
+                break;
+            }
+
+        let strzal = prompt("Podaj lietrę lub odgadnij hasło:").toUpperCase();
+           
+             if(litery.has(strzal)){
+              for(let j = 0; j < szyfr.length; j++){
+                  if(haslo[j] == strzal){
+                      szyfr[j] = strzal;
+                  }
+              }
+              litery.delete(strzal);
+            }
+            else if(strzal == haslo){
+                H1.innerHTML =`Gratuluje hasło to ${haslo}!`;
+                break;
+            }
+            else{
+                zmiana++;
+            }
+            wyswietl(szyfr);
+
+        }
+        
+        </script>
+</body>
+</html>
