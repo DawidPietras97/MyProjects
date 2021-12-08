@@ -1,0 +1,48 @@
+<meta charset="UTF-8">
+
+<script>
+
+for(i = 1; i <= 5; i++){
+    var los1 = Math.floor((Math.random() * 10) + 1);
+    var los2 = Math.floor((Math.random() * 10) + 1);
+    var los3 = Math.floor((Math.random() * 3) + 1);
+
+    switch(los3){
+        case 1:
+            los3 = "+";
+            break;
+        case 2:
+            los3 = "-";
+            break;
+        case 3: 
+            los3 = "*";
+            break;
+    }
+
+    if(los3 == "+"){
+        wynik = los1 + los2;
+    }
+    else if(los3 == "-"){
+        wynik = los1 - los2;
+    }
+    else if(los3 == "*"){
+        wynik = los1 * los2;
+    }
+
+    console.log(`Ile to jest: ${los1} ${los3} ${los2} ?`);
+    var odp = parseInt(prompt("Podaj wynik działania:"));
+
+    while(wynik != odp){
+        console.log(`Ile to jest: ${los1} * ${los2} ?`);
+        odp = parseInt(prompt("Podaj wynik działania:"));
+       
+        if(wynik == odp){
+            break;
+        }
+
+    }
+
+}
+
+
+</script>
