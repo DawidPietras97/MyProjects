@@ -1,0 +1,50 @@
+<meta charset="utf-8"/>
+<script>
+
+    //DO ZADANIA 26_5
+    
+    let sklep = new Map();
+    sklep.set("sok", 2.50);
+    sklep.set("chleb", 3.50);
+    sklep.set("woda", 1.50);
+    let dozaplaty = 0;
+    let koszyk = [];
+    
+    while(true){
+    
+        let menu = prompt("D-dodaj do koszyka, P-podglad koszyka, K-kasa/koniec").toUpperCase();
+    
+        if(menu == "D"){
+            while(true){
+                let towar = prompt("Dostępne produkty: chleb, sok, woda. Koniec dodawania dodaj puste pole").toLowerCase();
+                if(sklep.has(towar)){
+                    koszyk.push(towar);
+                }
+                else if(towar == ""){
+                    break;
+                }
+
+            }
+        }
+        else if(menu == "P"){
+            for(let i = 0; i < koszyk.length; i++){
+                console.log(`Produkt (${i+1}): ${koszyk[i]}`);
+
+            }
+        }
+        else if(menu == "K"){
+            for(let i = 0; i < koszyk.length; i++){
+            console.log(`Produkt:${koszyk[i]} Cena:${sklep.get(koszyk[i])}`);
+            dozaplaty += sklep.get(koszyk[i]); 
+            }
+            console.log(`Do zapłaty: ${dozaplaty}zł`);
+            break;
+            
+        }
+    
+    }
+    
+    
+    
+    </script>
+    
