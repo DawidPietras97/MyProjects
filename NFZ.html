@@ -1,0 +1,198 @@
+<meta charset="utf-8"/>
+<script>
+
+class Pacjent {
+    constructor(imie, nazwisko){
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+    }
+}
+
+class PacjentController {
+    constructor(){
+        this.listaPacjentow = [];
+        this.listaChorob = [];
+    }
+
+    dodajPacjenta(imie, nazwisko){
+        let pacjent = new Pacjent(imie, nazwisko);
+        this.listaPacjentow.push(pacjent);
+        console.log("Pomyślnie dodano nowego pacjenta!");
+    }
+
+    dodajChorobe(choroba){
+        this.listaChorob.push(choroba);
+        console.log("Przypisano chorobę do pacjenta");
+    }
+}
+
+class Przychodnia {
+    constructor(nazwa, miasto){
+        this.nazwa = nazwa;
+        this.miasto = miasto;
+    }
+}
+
+class ZUS extends PacjentController {
+    constructor(nazwaZUS){
+        super();
+        this.nazwaZUS = nazwaZUS;
+        this.listaPrzychodni = [];
+        this.menu();
+    }
+
+    menu(){
+        while(true){
+            let menu = prompt(`Witaj w ${this.nazwaZUS} \n1-Przychodnia, 2-Pacjent, 3 - Koniec`);
+
+                if(menu == "1"){
+                    let menuPrzych = prompt(`1 - Dodaj przychodnię, 2 - Dodaj pacjeta do przychodni, 3 - Lista przychodni, 4 - Lista pacjentów`);
+
+                    if(menuPrzych == "1"){
+                        let nazwaPrzych = prompt(`Podaj nazwę nowej przychodni:`);
+                        let miastoPrzych = prompt(`Podaj miejscowość nowej przychodni:`);
+
+                        let przychodnia = new Przychodnia(nazwaPrzych, miastoPrzych);
+                        this.listaPrzychodni.push(przychodnia);
+                        console.log("Pomyślnie dodano przychodnię");
+
+                    }
+                    
+                    else if(menuPrzych == "2"){
+                        let nazwaPrzych = prompt(`Podaj nazwę przychodni do której dodajesz pacjenta:`);
+                        let flaga = false;
+                        for(let i = 0; i < this.listaPrzychodni.length; i++){
+                            if(this.listaPrzychodni[i].nazwa == nazwaPrzych){
+                                let imie = prompt(`Podaj imie nowego pacjenta:`);
+                                let nazwisko = prompt(`Podaj nazwisko nowego pacjenta:`);
+                                this.dodajPacjenta(imie, nazwisko);
+                                flaga = true;
+                                break;
+                            }
+                        }
+                        if(flaga == false){
+                            console.log("Nie znaleziono takiej przychodni!");
+                        }
+
+
+                    }
+
+                    else if(menuPrzych == "3"){
+                       for(let i = 0; i < this.listaPrzychodni.length; i++){
+                           console.log(`Nazwa: ${this.listaPrzychodni[i].nazwa} Miasto: ${this.listaPrzychodni[i].miasto}`);
+                       }
+
+                    }
+                    else if(menuPrzych == "4"){
+                        let nazwaPrzych = prompt(`Podaj nazwę przychodni której wyświetlić pacjentów:`);
+                        let flaga = false;
+                        for(let i = 0; i < this.listaPrzychodni.length; i++){
+                            if(this.listaPrzychodni[i].nazwa == nazwaPrzych){
+                                console.log(nazwaPrzych);
+                                for(let x in this.listaPacjentow){
+                                    console.log(`Imie: ${this.listaPacjentow[x].imie} Nazwisko: ${this.listaPacjentow[x].nazwisko} `);
+                                }
+                                flaga = true;
+                                break;
+                            }
+                        }
+                        if(flaga == false){
+                            console.log("Nie znaleziono takiej przychodni!");
+                        }
+
+
+                    }
+
+
+                }
+                else if (menu == "2"){
+                    let menuPacj = prompt(`1 - Dodaj chorobę, 2 - lista chorób pacjeta`);
+
+                    if(menuPacj == "1"){
+                        let nazwaPrzych = prompt(`Podaj nazwę przychodni z której jest pacjent:`);
+                        let flaga = false;
+                        for(let i = 0; i < this.listaPrzychodni.length; i++){
+                            if(this.listaPrzychodni[i].nazwa == nazwaPrzych){
+                                let nazwaPacj = prompt(`Podaj nazwisko pacjenta któremu chcesz przypisać chorobę:`);  
+                                let flaga2 = false;
+                                for(let j = 0; j < this.listaPacjentow.length; j++){
+                                    if(this.listaPacjentow[j].nazwisko == nazwaPacj){
+                                        let choroba = prompt(`Wpisz nazwe choroby:`);
+                                        this.dodajChorobe(choroba);
+                                        flaga2 = true;
+                                        break;
+                                    }
+
+
+                                }
+                                if(flaga2 == false){
+                                    console.log("Nie znaleziono takiego pacjenta!");
+                                }
+
+                                flaga = true;
+                                break;
+                            }
+                        }
+                        if(flaga == false){
+                            console.log("Nie znaleziono takiej przychodni!");
+                        }
+
+
+
+                    }
+                    else if(menuPacj == "2"){
+                        let nazwaPrzych = prompt(`Podaj nazwę przychodni z której jest pacjent:`);
+                        let flaga = false;
+                        for(let i = 0; i < this.listaPrzychodni.length; i++){
+                            if(this.listaPrzychodni[i].nazwa == nazwaPrzych){
+                                let nazwaPacj = prompt(`Podaj nazwisko pacjenta którego choroby chcesz wyświetlić:`);  
+                                let flaga2 = false;
+                                for(let j = 0; j < this.listaPacjentow.length; j++){
+                                    if(this.listaPacjentow[j].nazwisko == nazwaPacj){
+                                        console.log(`Choroby pcajenta ${nazwaPacj}`);
+                                        for(let x in this.listaChorob){
+                                            console.log(`Choroba: ${this.listaChorob[x]}`);
+                                        }
+                                     
+                                        flaga2 = true;
+                                        break;
+                                    }
+
+                                }
+                                if(flaga2 == false){
+                                    console.log("Nie znaleziono takiego pacjenta!");
+                                }
+
+                                flaga = true;
+                                break;
+                            }
+                        }
+                        if(flaga == false){
+                            console.log("Nie znaleziono takiej przychodni!");
+                        }
+
+
+
+                    }
+
+                }
+                else if (menu == "3"){
+                    console.log("Zamknięto system");
+                    break;
+                }
+                else{
+                    console.log("Nie znaleziono takiej opcji!");
+                }
+        }
+
+    }
+}
+
+
+let ob = new ZUS("Zakład Ubezpieczeń Społecznych");
+
+
+
+
+
+</script>
