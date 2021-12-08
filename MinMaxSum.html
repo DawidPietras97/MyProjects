@@ -1,0 +1,45 @@
+<meta charset="utf-8" />
+<script>
+    let tablica = [];
+    let suma = 0;
+    let srednia = 0;
+    let max;
+    let min;
+    let parzyste = 0;
+    let nieparzyste = 0;
+
+
+    while (true) {
+        var liczba = parseInt(prompt("Podaj liczbę (0 = koniec podawania liczb):"));
+        suma += liczba;
+        if (liczba == 0) {
+            break;
+        }
+        tablica.push(liczba);
+    }
+
+    max = tablica[0];
+    min = tablica[0];
+
+    for (let x in tablica) {
+        console.log(tablica[x]);
+    }
+
+    for (let i = 0; i < tablica.length; i++) {
+        if (tablica[i] > max) {
+            max = tablica[i];
+        } else if (tablica[i] < min) {
+            min = tablica[i];
+        }
+
+        if (tablica[i] % 2 == 0) {
+            parzyste++;
+        } else {
+            nieparzyste++;
+        }
+    }
+
+    srednia = suma / tablica.length;
+    console.log(`Suma:${suma} średnia: ${srednia} max:${max} min:${min} parzyste: ${parzyste} nieparzyste: ${nieparzyste}`);
+
+</script>
