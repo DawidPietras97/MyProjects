@@ -1,0 +1,28 @@
+<meta charset="utf-8"/>
+<script>
+
+let litery = new Map();
+let dane = prompt("Podaj słowo:").toUpperCase();
+let wartosc = 0;
+
+for(let i = 0; i < dane.length; i++){
+    litery.set(dane[i], wartosc);
+}
+
+
+for(let x of litery.keys()){
+    
+    for(let i = 0; i < dane.length; i++){
+        if(x == dane[i]){
+            litery.set(x, ++wartosc)
+        }
+
+    }
+    wartosc = 0;
+    
+
+    console.log(`Litera ${x} występuje ${litery.get(x)} razy`);
+}
+
+
+</script>
