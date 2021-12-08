@@ -1,0 +1,36 @@
+<meta charset="utf-8"/>
+<script>
+
+let wylosowane =[];
+
+
+for(let i=0; i<10; i++){
+    let los = Math.floor((Math.random() * 100) + 1);
+    wylosowane.push(los);
+}
+console.log(wylosowane);
+
+
+sortuj = (tab) => {
+let przechowaj;
+for(let i = 0; i < tab.length; i++){
+    for(let j = 1; j < tab.length-i; j++){
+        if(tab[j-1] > tab[j]){
+            przechowaj = tab[j-1];
+            tab[j-1] = tab[j];
+            tab[j] = przechowaj;
+            
+        }
+
+    }
+
+
+}
+
+console.log(tab);
+}
+
+sortuj(wylosowane);
+
+
+</script>
