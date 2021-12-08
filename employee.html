@@ -1,0 +1,137 @@
+<meta charset="utf-8"/>
+<script>
+
+class Pracownik {
+    constructor(imie, nazwisko, kontrakt, pensja){
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.kontrakt = kontrakt;
+        this.pensja = pensja;
+    }
+}
+
+class PracownikController{
+    constructor(){
+        this.listaPracownikow = [];
+    }
+
+   
+
+    dodajPracownika(imie, nazwisko, kontrakt = "staż", pensja = 1000){
+
+        let pracownik = new Pracownik(imie, nazwisko, kontrakt, pensja);
+        this.listaPracownikow.push(pracownik);
+        console.log("Pomyślnie dodano pracownika!");
+
+    }
+    pokazPracownikow(){
+        for(let i = 0; i < this.listaPracownikow.length; i++){
+            console.log(`Imie: ${this.listaPracownikow[i].imie} Nazwisko: ${this.listaPracownikow[i].nazwisko} Kontrakt: ${this.listaPracownikow[i].kontrakt} Prnsja: ${this.listaPracownikow[i].pensja}`);
+
+        }
+
+    }
+    usunPracownika(nazwisko){
+        let flaga = false;
+        for(let i=0; i < this.listaPracownikow.length; i++){
+            if(this.listaPracownikow[i].nazwisko == nazwisko){
+               
+                this.listaPracownikow.splice(i,1);
+                flaga = true;
+                console.log("Pomyślnie usunięto pracownika!");
+                break;
+                
+            }
+            
+        }
+        if(flaga != true){
+            console.log("Nie udało się usunąć pracownika!");
+
+        }
+
+    }
+    zmienKontrakt(nazwisko, pensja){
+        let flaga = false;
+        for(let i = 0; i < this.listaPracownikow.length; i++){
+            if(this.listaPracownikow[i].nazwisko == nazwisko ){
+                this.listaPracownikow[i].pensja = pensja; 
+                this.listaPracownikow[i].kontrakt = "etat";
+                flaga = true;
+                console.log("Pomyślnie zmieniono kontrakt!");
+                break;
+
+            }
+
+        }
+        if(flaga != true){
+            console.log("Nie udało się zmienić!");
+
+        }
+
+
+    }
+}
+
+class Firma extends PracownikController{
+
+    constructor(nazwaFirmy){
+        super();
+        this.nazwaFirmy = nazwaFirmy;
+        this.menu();
+    }
+
+    menu(){
+
+    while(true){
+        let menu = prompt(`Witaj w firmie ${this.nazwaFirmy} \n1-dodaj pracownika, 2-pokaz pracownikow, 3-usun pracownika, 4-zmiena kontrakt, 5 - koniec`);
+
+        if(menu == "1"){
+            //PROMPTY:imie, nazwsko, kontrakt (staz/etat)
+            //jezeli bedzie etat to jeszcze pytamy pensje
+            let imie = prompt("Podaj imie pracownika:");
+            let nazwisko = prompt("Podaj nazwisko pracownika:");
+            let kontrakt = prompt("Podaj kontrakt pracownika (staż/etat):");
+
+            if(kontrakt == "etat"){
+                let pensja = parseInt(prompt("Podaj wysokość wynagrodzenia:"));
+
+                this.dodajPracownika(imie, nazwisko, kontrakt, pensja);
+            }
+            else if(kontrakt == "staż"){
+                this.dodajPracownika(imie, nazwisko);
+            }
+            else{
+                console.log("Niepoprawny kontrakt!");
+            }
+        }
+        else if(menu == "2"){
+            this.pokazPracownikow(); //Imię:..... Nazwisko: .... Kontrakt: .... Pensja: ...
+        }
+        else if(menu == "3"){
+            //prompty: nazwisko
+            let nazwisko = prompt("Podaj nazwisko pracownika:");
+            this.usunPracownika(nazwisko);
+        }
+        else if(menu == "4"){
+            //prompty: nazwisko, pensja, jesli chodzi o kontrakt (staz -> etat, etat -> etat)
+            let nazwisko = prompt("Podaj nazwisko pracownika:");
+            let pensja = prompt("Podaj pensje pracownika:");
+            this.zmienKontrakt(nazwisko, pensja);
+           
+        }
+        else if(menu == "5"){
+            break;   
+        }
+    }
+
+    }
+
+
+
+
+}
+
+let ob = new Firma("Games Vico !");
+
+
+</script>
